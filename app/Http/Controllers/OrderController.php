@@ -11,36 +11,11 @@ class OrderController extends Controller
     public function index(Request $request)
     {
 
-        // if ($request->ajax()) {
-        //     $data = DB::table('orders')->get();
-
-        //     return Datatables::of($data)
-        //             ->addIndexColumn()
-        //             ->addColumn('action', function ($row) {
-        //                 $btn = '<div class="d-flex">
-        //                 <button type="button" title="EDIT" class="btn btn-sm btn-biru me-1" data-bs-toggle="modal"
-        //                     data-bs-target="#updateData" data-id="' . $row->id . '"
-        //                     data-nama="' . $row->nama . '"
-        //                     data-harga="' . $row->harga . '"
-        //                     data-url="' . route('orders.update', ['id' => $row->id]) . '">
-        //                     <i class="bi bi-pen"></i>
-        //                 </button>
-        //                 <form id="deleteForm" action="' . route('orders.delete', ['id' => $row->id]) . '" method="POST">
-        //                 ' . csrf_field() . '
-        //                 ' . method_field('DELETE') . '
-        //                     <button type="button" title="DELETE" class="btn btn-sm btn-biru btn-delete" onclick="confirmDelete(event)">
-        //                         <i class="bi bi-trash"></i>
-        //                     </button>
-        //                 </form>
-        //                 </div>';
-        //                 return $btn;
-        //             })
-        //             ->rawColumns(['action'])
-        //             ->make(true);
-        // }
 
         $data = DB::table('orders')->get();
-        return view('orders',['data'=>$data]);
+        $categories = DB::table('categories')->get();
+        $menus = DB::table('menus')->get();
+        return view('orders',['data'=>$data,'categories'=>$categories,'menus'=>$menus]);
     }
 
     public function store(Request $request)
